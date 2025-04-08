@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Акордеон з анімацією</title>
+    <style>
+        .accordion {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .accordion-item {
+            border: 1px solid #ccc;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background-color: #f0f0f0;
+            padding: 10px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .accordion-content {
+            height: 0;
+            overflow: hidden;
+            padding: 0 10px;
+            transition: height 0.3s ease, padding 0.3s ease;
+        }
+
+        .accordion-content.open {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="accordion">
+        <div class="accordion-item">
+            <div class="accordion-header">Розділ 1</div>
+            <div class="accordion-content">
+                <p>Це вміст розділу 1.</p>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">Розділ 2</div>
+            <div class="accordion-content">
+                <p>Це вміст розділу 2.</p>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">Розділ 3</div>
+            <div class="accordion-content">
+                <p>Це вміст розділу 3.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const headers = document.querySelectorAll('.accordion-header');
+
+        headers.forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+
+                // Закрити всі інші блоки
+                document.querySelectorAll('.accordion-content').forEach(el => {
+                    if (el !== content) {
+                        el.style.height = '0';
+                        el.classList.remove('open');
+                    }
+                });
+
+                // Перевірка стану активності
+                if (content.classList.contains('open')) {
+                    content.style.height = '0';
+                    content.classList.remove('open');
+                } else {
+                    content.style.height = content.scrollHeight + 'px';
+                    content.classList.add('open');
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
